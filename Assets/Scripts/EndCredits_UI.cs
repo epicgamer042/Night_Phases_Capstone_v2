@@ -3,10 +3,6 @@ using UnityEngine.SceneManagement;
 
 public class EndCredits_UI : MonoBehaviour
 {
-    public void PlayGame()
-    {
-        SceneManager.LoadScene("Level1");
-    }
 
     public void ExitGame()
     {

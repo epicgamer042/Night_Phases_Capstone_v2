@@ -8,6 +8,11 @@ public class MainMenu_UI : MonoBehaviour
         SceneManager.LoadScene("Level1");
     }
 
+    public void EndCredits()
+    {
+        SceneManager.LoadScene("EndCredits");
+    }
+
     public void ExitGame()
     {
         //Exit in build application
