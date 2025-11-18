@@ -305,14 +305,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.3254902}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 0}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -340,6 +340,7 @@ GameObject:
   m_Component:
   - component: {fileID: 97058249}
   - component: {fileID: 97058250}
+  - component: {fileID: 97058251}
   m_Layer: 5
   m_Name: InGame_UI
   m_TagString: Untagged
@@ -380,7 +381,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f7d2d6dc0e8c9b4e91cf7e145e7c5f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pauseMenuUI: {fileID: 230260663}
+  inGameUICanvasGroup: {fileID: 97058251}
   timerValue: {fileID: 593843380}
+--- !u!225 &97058251
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 97058248}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &198236092
 GameObject:
   m_ObjectHideFlags: 0
@@ -658,6 +673,7 @@ GameObject:
   m_Component:
   - component: {fileID: 230260664}
   - component: {fileID: 230260665}
+  - component: {fileID: 230260666}
   m_Layer: 5
   m_Name: PauseMenu_UI
   m_TagString: Untagged
@@ -702,6 +718,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6cc1ee11fb517f45bc24be463f92d38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!225 &230260666
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 230260663}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &265318636
 GameObject:
   m_ObjectHideFlags: 0
@@ -1284,7 +1312,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -1401.2914, y: -543.5453}
+  m_SizeDelta: {x: -1400, y: -540}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &687865125
 MonoBehaviour:
@@ -1299,7 +1327,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EffectColor: {r: 0.1981132, g: 0.1981132, b: 0.1981132, a: 1}
-  m_EffectDistance: {x: 20, y: -20}
+  m_EffectDistance: {x: 10, y: -10}
   m_UseGraphicAlpha: 1
 --- !u!114 &687865126
 MonoBehaviour:
@@ -1321,7 +1349,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 0}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2657,7 +2685,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1930986028}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 97058250}
+        m_TargetAssemblyTypeName: InGame_UI, Assembly-CSharp
+        m_MethodName: EnablePauseMenuUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1930986028
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2778,7 +2818,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1962799339}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 97058250}
+        m_TargetAssemblyTypeName: InGame_UI, Assembly-CSharp
+        m_MethodName: DisablePauseMenuUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1962799339
 MonoBehaviour:
   m_ObjectHideFlags: 0
