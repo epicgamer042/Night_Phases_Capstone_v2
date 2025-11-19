@@ -1,4 +1,4 @@
-
+ 
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -13,24 +13,24 @@ public class PlayerMovement : MonoBehaviour
     [Header("Settings")]
     public float moveSpeed = 5f;
 
-    private Vector2 _moveDirection;
+    private float horizontal;
 
-    private void Update()
+    private void Update() //Once per frame
     {
         // Check if move action is valid before reading
         if (move != null && move.action != null)
         {
-            _moveDirection = move.action.ReadValue<Vector2>();
+            horizontal = move.action.ReadValue<float>();
         }
     }
 
-    private void FixedUpdate()
+    private void FixedUpdate() //Once per physic tick (50 times per second default)
     {
         // Ensure Rigidbody exists before applying velocity
         if (rb != null)
         {
             rb.linearVelocity = new Vector2(
-                _moveDirection.x * moveSpeed,
+                horizontal * moveSpeed,
                 rb.linearVelocity.y // Keep existing Y velocity
             );
         }
@@ -63,36 +63,4 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 }
-//original code based on youtube video - worked w/ left/right movement, but firing message was causing issues
-/*public class PlayerMovement : MonoBehaviour
-{
-    public Rigidbody2D rb;
-    public float moveSpeed;
-    private Vector2 _moveDirection;
-    public InputActionReference move;
-    public InputActionReference fire;
-
-    private void Update()
-    {
-        _moveDirection = move.action.ReadValue<Vector2>();
-    }
-    private void FixedUpdate()
-    {
-        rb.linearVelocity = new Vector2(x:_moveDirection.x * moveSpeed, rb.linearVelocity.y * moveSpeed);
-    }
-
-    private void OnEnable()
-    {
-        fire.action.started += Fire;
-    }
-
-    private void OnDisable()
-    {
-        fire.action.started -= Fire;
-    }
-    private void Fire(InputAction.CallbackContext obj)
-    {
-        Debug.Log("Fired");
-    }
-}*/
 
