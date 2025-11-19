@@ -1,21 +1,30 @@
- 
+
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 //trying copilot suggestions
 public class PlayerMovement : MonoBehaviour
 {
-    [Header("References")]
+
+    //=====// DEFINITIONS //=====//
+
+    [Header("Input Action References")]
     public Rigidbody2D rb;
     public InputActionReference move;
     public InputActionReference fire;
+    public InputActionReference jump;
 
     [Header("Settings")]
     public float moveSpeed = 5f;
+    [SerializeField] private float jumpForce = 8f;
 
     private float horizontal;
 
-    private void Update() //Once per frame
+
+    //=====// EVENT METHODS //=====//
+
+    private void Update()
     {
         // Check if move action is valid before reading
         if (move != null && move.action != null)
@@ -24,42 +33,66 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void FixedUpdate() //Once per physic tick (50 times per second default)
+    private void FixedUpdate()
     {
         // Ensure Rigidbody exists before applying velocity
         if (rb != null)
         {
-            rb.linearVelocity = new Vector2(
-                horizontal * moveSpeed,
-                rb.linearVelocity.y // Keep existing Y velocity
-            );
+            rb.linearVelocity = new Vector2(horizontal * moveSpeed, rb.linearVelocity.y);
         }
     }
 
-    private void OnEnable()
+
+    //=====// INPUT ACTION MANAGEMENT //=====//
+
+    private void SetupAction(InputActionReference actionRef, 
+                             System.Action<InputAction.CallbackContext> callback, 
+                             bool enable)
     {
-        // Subscribe to fire event safely
-        if (fire != null && fire.action != null)
+        if (actionRef != null && actionRef.action != null)
         {
-            fire.action.started += Fire;
+            if (enable)
+            {
+                if (callback != null) actionRef.action.started += callback;
+                actionRef.action.Enable();
+            }
+            else
+            {
+                if (callback != null) actionRef.action.started -= callback;
+                actionRef.action.Disable();
+            }
         }
+    }
+        private void OnEnable()
+    {
+        SetupAction(fire, TryFire, true);
+        SetupAction(jump, TryJump, true);
+        SetupAction(move, null, true); // move has no event, just enabled
     }
 
     private void OnDisable()
     {
-        // Unsubscribe safely to prevent dangling references
-        if (fire != null && fire.action != null)
-        {
-            fire.action.started -= Fire;
-        }
+        SetupAction(fire, TryFire, false);
+        SetupAction(jump, TryJump, false);
+        SetupAction(move, null, false);
     }
 
-    private void Fire(InputAction.CallbackContext context)
+
+    //=====// FIRE METHOD //=====//
+
+    private void TryFire(InputAction.CallbackContext context)
     {
-        // Double-check object is still valid before doing anything
-        if (this != null && gameObject.activeInHierarchy)
-        {
             Debug.Log("Fired");
+    }
+
+
+    //=====// JUMP METHOD //=====//
+
+    private void TryJump(InputAction.CallbackContext ctx)
+    {
+        if (rb != null)
+        {
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
         }
     }
 }
