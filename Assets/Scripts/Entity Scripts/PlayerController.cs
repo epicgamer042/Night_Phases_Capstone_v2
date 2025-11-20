@@ -9,7 +9,6 @@ public class PlayerController : Entity
     //=====// DEFINITIONS //=====//
 
     [Header("Input Action References")]
-    public Rigidbody2D rb;
     public InputActionReference move;
     public InputActionReference fire;
     public InputActionReference jump;
