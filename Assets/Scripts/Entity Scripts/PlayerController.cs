@@ -3,8 +3,7 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-//trying copilot suggestions
-public class PlayerMovement : MonoBehaviour
+public class PlayerController : Entity
 {
 
     //=====// DEFINITIONS //=====//

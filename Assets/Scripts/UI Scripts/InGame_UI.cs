@@ -55,14 +55,14 @@ public class InGame_UI : MonoBehaviour
 
     public void EanableInGameUI()
     {
-        inGameUICanvasGroup.interactable = false;
-        inGameUICanvasGroup.blocksRaycasts = false;
+        inGameUICanvasGroup.interactable = true;
+        inGameUICanvasGroup.blocksRaycasts = true;
     }
 
     public void DisableInGameUI()
     {
-        inGameUICanvasGroup.interactable = true;
-        inGameUICanvasGroup.blocksRaycasts = true;
+        inGameUICanvasGroup.interactable = false;
+        inGameUICanvasGroup.blocksRaycasts = false;
     }
 
     //====// IN GAME UI MANAGER //====//
