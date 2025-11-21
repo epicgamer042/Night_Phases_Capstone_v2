@@ -4,8 +4,9 @@ using UnityEngine.UI;
 
 public class InGame_UI : MonoBehaviour
 {
-    [SerializeField] private GameObject pauseMenuUI;
-    [SerializeField] private GameObject EndGameMenuUI;
+    [SerializeField] private GameObject pauseMenuUI_Panel;
+    [SerializeField] private GameObject EndGameMenuUI_Panel;
+    [SerializeField] private EndGame_UI endGameUI;
     [SerializeField] private CanvasGroup inGameUICanvasGroup;
     [SerializeField] private TextMeshProUGUI timerValue;
 
@@ -16,21 +17,30 @@ public class InGame_UI : MonoBehaviour
 
     private void Update()
     {
-        timerValue.text = Time.timeSinceLevelLoad.ToString("F1") + "s";
+        timerValue.text = Time.timeSinceLevelLoad.ToString("F2") + "s";
     }
 
+    private void OnEnable()
+    {
+        EndGameZone.OnLevelCompleted += HandleLevelCompleted;
+    }
+
+    private void OnDisable()
+    {
+        EndGameZone.OnLevelCompleted -= HandleLevelCompleted;
+    }
     //====// PAUSE MENU MANAGER //====//
 
     public void EnablePauseMenuUI()
     {
-        pauseMenuUI.SetActive(true);
+        pauseMenuUI_Panel.SetActive(true);
         Time.timeScale = 0;
         DisableInGameUI();
     }
 
     public void DisablePauseMenuUI()
     {
-        pauseMenuUI.SetActive(false);
+        pauseMenuUI_Panel.SetActive(false);
         Time.timeScale = 1;
         EanableInGameUI();
     }
@@ -39,17 +49,24 @@ public class InGame_UI : MonoBehaviour
 
     public void EnableEndGameMenuUI()
     {
-        EndGameMenuUI.SetActive(true);
+        EndGameMenuUI_Panel.SetActive(true);
         Time.timeScale = 0;
         DisableInGameUI();
     }
 
     public void DisableEndGameMenuUI()
     {
-        EndGameMenuUI.SetActive(false);
+        EndGameMenuUI_Panel.SetActive(false);
         Time.timeScale = 1;
         EanableInGameUI();
     }
+
+    private void HandleLevelCompleted()
+    {
+        EnableEndGameMenuUI();
+        endGameUI.ShowFinalTime(timerValue.text);
+    }
+
 
     //====// IN GAME UI MANAGER //====//
 
@@ -65,10 +82,4 @@ public class InGame_UI : MonoBehaviour
         inGameUICanvasGroup.blocksRaycasts = false;
     }
 
-    //====// IN GAME UI MANAGER //====//
-
-    public string GetTimerValue()
-    {
-        return timerValue.text;
-    }
 }

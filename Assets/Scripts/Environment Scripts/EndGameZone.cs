@@ -1,18 +1,16 @@
 using UnityEngine;
+using System;
 
 public class EndGameZone : MonoBehaviour
 {
-    [SerializeField] private InGame_UI inGameUI;
-    [SerializeField] private EndGame_UI endGameUI;
+
+    public static event Action OnLevelCompleted;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Player"))
+        if (collision.CompareTag("Player"))
         {
-            Debug.Log("GAME OVER TRIGGERED");
-            inGameUI.EnableEndGameMenuUI();
-            string leveltime = inGameUI.GetTimerValue();
-            endGameUI.ShowFinalTime(leveltime);
+            OnLevelCompleted?.Invoke(); // this fires the event
         }
     }
 }
