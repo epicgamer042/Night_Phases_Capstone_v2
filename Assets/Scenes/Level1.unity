@@ -1061,7 +1061,7 @@ GameObject:
   - component: {fileID: 306860371}
   - component: {fileID: 306860373}
   - component: {fileID: 306860372}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Step0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1595,7 +1595,7 @@ GameObject:
   - component: {fileID: 549189721}
   - component: {fileID: 549189723}
   - component: {fileID: 549189722}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Step1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1949,7 +1949,7 @@ GameObject:
   - component: {fileID: 653447284}
   - component: {fileID: 653447286}
   - component: {fileID: 653447285}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2444,7 +2444,7 @@ GameObject:
   - component: {fileID: 832942989}
   - component: {fileID: 832942991}
   - component: {fileID: 832942990}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2884,7 +2884,7 @@ GameObject:
   - component: {fileID: 931524418}
   - component: {fileID: 931524420}
   - component: {fileID: 931524419}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3338,7 +3338,7 @@ GameObject:
   - component: {fileID: 1050008588}
   - component: {fileID: 1050008590}
   - component: {fileID: 1050008589}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform00
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3619,7 +3619,7 @@ Transform:
   m_GameObject: {fileID: 1099491168}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.38, y: -3.266, z: 0}
+  m_LocalPosition: {x: -8.276, y: -3.266, z: 0}
   m_LocalScale: {x: 0.44347513, y: 0.8356, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3637,7 +3637,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 568ca14f40617d9428d19d1ccda5b10e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
-  rb: {fileID: 1099491170}
+  maxHealth: 10
+  currentHealth: 0
+  groundCheckDistance: 0.5
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 256
+  isGrounded: 0
+  healthValue: {fileID: 896674690}
   move: {fileID: -6323504667231370231, guid: 18d8e6463ffc0b548adbef63f7a450d5, type: 3}
   fire: {fileID: -5040143401972108725, guid: 18d8e6463ffc0b548adbef63f7a450d5, type: 3}
   jump: {fileID: 4016641135004302007, guid: 18d8e6463ffc0b548adbef63f7a450d5, type: 3}
@@ -4032,7 +4039,7 @@ GameObject:
   - component: {fileID: 1460891488}
   - component: {fileID: 1460891490}
   - component: {fileID: 1460891489}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4965,7 +4972,7 @@ GameObject:
   - component: {fileID: 1792488418}
   - component: {fileID: 1792488420}
   - component: {fileID: 1792488419}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5099,7 +5106,7 @@ GameObject:
   - component: {fileID: 1806265619}
   - component: {fileID: 1806265622}
   - component: {fileID: 1806265620}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5256,7 +5263,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -259, y: 0}
+  m_AnchoredPosition: {x: -801, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &1930986025
@@ -5612,7 +5619,7 @@ GameObject:
   - component: {fileID: 1992484744}
   - component: {fileID: 1992484746}
   - component: {fileID: 1992484745}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Final Ledge
   m_TagString: Untagged
   m_Icon: {fileID: 0}

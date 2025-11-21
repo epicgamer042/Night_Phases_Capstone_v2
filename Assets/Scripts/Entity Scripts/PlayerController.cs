@@ -1,5 +1,6 @@
 
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,6 +8,9 @@ public class PlayerController : Entity
 {
 
     //=====// DEFINITIONS //=====//
+
+    [Header("Player Health Bar")]
+    [SerializeField] private TextMeshProUGUI healthValue;
 
     [Header("Input Action References")]
     public InputActionReference move;
@@ -22,8 +26,16 @@ public class PlayerController : Entity
 
     //=====// EVENT METHODS //=====//
 
-    private void Update()
+    protected override void Awake()
     {
+        base.Awake();
+        UpdateHealthUI();
+    }
+
+    protected override void Update()
+    {
+        base.Update();
+
         // Check if move action is valid before reading
         if (move != null && move.action != null)
         {
@@ -61,7 +73,7 @@ public class PlayerController : Entity
             }
         }
     }
-        private void OnEnable()
+    private void OnEnable()
     {
         SetupAction(fire, TryFire, true);
         SetupAction(jump, TryJump, true);
@@ -88,10 +100,18 @@ public class PlayerController : Entity
 
     private void TryJump(InputAction.CallbackContext ctx)
     {
-        if (rb != null)
+        if (rb != null && isGrounded)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
         }
+    }
+
+    //=====// PLAYER HEALTH UI UPDATE //=====//
+
+    public void UpdateHealthUI()
+    {
+        if (healthValue != null)
+            healthValue.text = GetCurrentHealth.ToString();
     }
 }
 
